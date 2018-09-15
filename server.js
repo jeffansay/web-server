@@ -23,7 +23,10 @@ app.use((req, res, next) => {
     const log = `${now}: ${req.method} ${req.url}`;
 
     console.log(log);
-    fs.appendFile('server.log', log + '\n');
+    fs.appendFile('server.log', log + '\n', () => {
+        console.log('FS here!');
+        
+    });
 
     
     next();
@@ -44,6 +47,14 @@ app.get('/', (req, res) => {
        });
 });
 
+app.get('/project', (req, res) => {
+    // res.send('<h1>hello express</h1>');
+   res.render('project.hbs', {
+        pageTitle: 'Project Page',
+        welcomMsg: 'Welcome to my website',
+     
+   });
+});
 
 app.get('/about', (req, res) => {
         res.render('about.hbs', {
