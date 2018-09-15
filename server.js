@@ -6,7 +6,7 @@ const fs = require('fs');
 hbs.registerPartials(__dirname + '/views/partials');
 // variable
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const msg = `Running on port 3000`;
 
 app.set('view engine', 'hbs');
@@ -29,9 +29,9 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use((req, res) => {
-        res.render('maintainance.hbs');
-});
+// app.use((req, res) => {
+//         res.render('maintainance.hbs');
+// });
 
 app.use(express.static(__dirname + '/public'));
 
@@ -60,6 +60,6 @@ app.get('/bad', (req, res) => {
 
 // app listen for local server
 app.listen(port, () => {
-    console.log(msg);
+    console.log(`${msg} or ${port}`);
     
 });
